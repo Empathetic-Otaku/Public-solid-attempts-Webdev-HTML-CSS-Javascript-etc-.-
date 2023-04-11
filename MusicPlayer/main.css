@@ -32,7 +32,7 @@ body{
     border-radius: 20px;
     box-shadow: 0 20px 20px 0 var(--sidePurple);
     display: flex;
-    padding: 60px 100px;
+    padding: 60px 50px;
     position: relative;
     margin: 200px 0;
     z-index: 10;
@@ -98,7 +98,7 @@ body{
 .action-btn{
     background-color: #ffffff;
     border: 0;
-    color:#f8f299;
+    color:#302f25;
     font-size: 20px;
     cursor: pointer;
     padding: 10px;
@@ -106,7 +106,7 @@ body{
 }
 
 .action-btn-big{
-    color: #f8f299;
+    color: #302f25;
     font-size: 30px;
 }
 
@@ -119,7 +119,7 @@ body{
     border-radius: 15px 15px 0 0;
     position: absolute;
     top:0;
-    left:20px;
+    left:19px;
     width: calc(100% - 40px);
     opacity: 0;
     transform: translateY(0%);

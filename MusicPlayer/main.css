@@ -120,6 +120,7 @@ body{
     position: absolute;
     top:0;
     left:19px;
+    height:90px;
     width: calc(100% - 40px);
     opacity: 0;
     transform: translateY(0%);
@@ -133,3 +134,21 @@ body{
     transform: translateY(-100%)
 }
 
+/* for the "play" class on each container will track music progress*/
+.progress-container{
+    background: #ffffff;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px 0;
+    height: 4px;
+    width: 100%;
+}
+
+.progress{
+    background-color: #fffc37;
+    border-radius: 5px; 
+    height: 100%;
+    width: 0%;
+    transition: width 0.1s linear;
+}
+ 

@@ -11,13 +11,13 @@ const progress = document.querySelector(".progress")
 const progressContainer = document.querySelector(".progress-container")
 
 //song titles
-const songs = ["L'Indecis - Soulful", "MF DOOM - Saffron", "Nujabes - Aruarian Dance"]
+const songs = ["L'Indecis - Soulful", "MF DOOM - Saffron", "Nujabes - Aruarian Dance"];
 
 //keep track of songs
-let songIndex = 0
+let songIndex = 0;
 
 //Initially load song info to DOM
-loadSong(songs[songIndex])
+loadSong(songs[songIndex]);
 
 //Function for running songs in DOM
 function loadSong(song) {
@@ -30,19 +30,44 @@ function loadSong(song) {
 function playSong(){
     musicContainer.classList.add("play")
     //changes button type from pause to play and vice versa
-    playBtn.querySelector("i.fas").classList.remove("fa-solid fa-play")
+    playBtn.querySelector("i.fas").classList.remove("fa-play")
     playBtn.querySelector("i.fas").classList.add("fa-pause")
 
-    audio.play()
+    audio.play();
 }
 
 function pauseSong(){
     musicContainer.classList.remove("play")
     //changes button type from pause to play and vice versa
-    playBtn.querySelector("i.fas").classList.add("fa-solid fa-play")
+    playBtn.querySelector("i.fas").classList.add("fa-play")
     playBtn.querySelector("i.fas").classList.remove("fa-pause")
 
-    audio.pause()
+    audio.pause();
+}
+
+function nextSong(){
+    songIndex++;
+
+    if(songIndex > songs.length - 1){
+        //0 because you wouldn't know which song you start from.
+        songIndex = 0;
+    }
+
+    loadSong(songs[songIndex]);
+
+    playSong();
+}
+
+function prevSong(){
+    songIndex--;
+
+    if(songIndex < 0){
+        songIndex = songs.length - 1;
+    }
+
+    loadSong(songs[songIndex]);
+
+    playSong();
 }
 
 playBtn.addEventListener("click", () => {
@@ -56,6 +81,29 @@ playBtn.addEventListener("click", () => {
     }
 })
 
+function updateProgress(e){
+    const {duration, currentTime} = e.srcElement
+    const progressPercent = (currentTime / duration) * 100
+    progress.style.width = `${progressPercent}%`
+}
+
 //Change song events
-//prevBtn.addEventListener("click", prevSong)
-//nextBtn.addEventListener("click", nextSong)
+prevBtn.addEventListener("click", prevSong)
+nextBtn.addEventListener("click", nextSong)
+
+//calls function to update progress of song
+audio.addEventListener("timeupdate", updateProgress )
+
+function setProgress(e){
+    const width = this.clientWidth
+    const clickSegment = e.offsetX
+    const duration = audio.duration
+
+    audio.currentTime = (clickSegment / width) * duration;
+}
+
+//progress bar skipping
+progressContainer.addEventListener("click", setProgress)
+
+//to keep progress bar going
+audio.addEventListener("ended", nextSong);
